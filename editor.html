@@ -1,0 +1,708 @@
+    
+    <div class="edit-content">
+    <div>
+        
+    <body>
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+        <script>
+            function printPageAsPDF() {
+                  // Open the print dialog box
+                  window.print();
+
+                  // Wait for the user to choose a printer
+                  setTimeout(function() {
+                    // Choose the "Save as PDF" option from the list of printers
+                    var options = { 
+                      name: "My PDF",
+                      pdfRenderIntent: 4
+                    };
+                    window.print(options);
+                  }, 1000); // wait 1 second for the print dialog to open
+                }
+        </script>
+
+        <script id="MainScript">
+            var config = {
+                apiKey: "AIzaSyBNYfWsGWI6-q8by0KkHK05Joh4vIC25ek",
+                authDomain: "courseoutline-a3649.firebaseapp.com",
+                projectId: "courseoutline-a3649",
+                storageBucket: "courseoutline-a3649.appspot.com",
+                messagingSenderId: "711912027557",
+                appId: "1:711912027557:web:656b73c6539332c7cb644c",
+                measurementId: "G-7Q0C7PM4NG"
+            };
+
+            firebase.initializeApp(config);
+            var db = firebase.firestore();
+  
+        </script>
+        <div id ="SCREEN_VIEW_CONTAINER">
+		<header>Previous Outlines</header>
+		<ul id="collection-list"></ul>
+		
+        <script>
+
+			var collectionRef = db.collection("documents");
+
+			// Get reference to unordered list element and document details div in HTML
+			var collectionList = document.getElementById("collection-list");
+			var documentDetails = document.getElementById("editormain");
+
+			// Retrieve data from Firestore collection and add to unordered list element
+			collectionRef.get().then(function(querySnapshot) {
+			  querySnapshot.forEach(function(doc) {
+				// Get name and data of document
+				var name = doc.id;
+				var data = doc.data();
+			
+				// Create new list item element with clickable link to display document details
+				var listItem = document.createElement("li");
+				var link = document.createElement("a");
+				link.href = "#";
+				link.textContent = name;
+				link.addEventListener("click", function() {
+				  // Clear existing document details
+                  var documentDetails = document.getElementById("editormain");
+                  val = doc.data().doc;
+                  val = String(val);
+				  documentDetails.innerHTML = val;
+                  let i0 = document.getElementById("indicator0");
+                let i1 = document.getElementById("indicator1");
+                let i2 = document.getElementById("indicator2");
+                let i3 = document.getElementById("indicator3");
+                let i4 = document.getElementById("indicator4");
+                let i5 = document.getElementById("indicator5");
+                let i6 = document.getElementById("indicator6");
+                let i7 = document.getElementById("indicator7");
+                let i8 = document.getElementById("indicator8");
+                let i9 = document.getElementById("indicator9");
+                let i10 = document.getElementById("indicator10");
+                let i11 = document.getElementById("indicator11");
+
+                let complete1 = document.getElementById("completed1").value;
+                let complete2 = document.getElementById("completed2").value;
+                let complete3 = document.getElementById("completed3").value;
+                let complete4 = document.getElementById("completed4").value;
+                let r = document.getElementById("feedback");
+                let h = document.getElementById("historylog");
+                
+                h.innerHTML = doc.data().hl;
+                r.value = doc.data().justifications;
+
+                i0.innerText = doc.data().indicator0;
+                i1.innerText = doc.data().indicator1;
+                i2.innerText = doc.data().indicator2;
+                i3.innerText = doc.data().indicator3;
+                i4.innerText = doc.data().indicator4;
+                i5.innerText = doc.data().indicator5;
+                i6.innerText = doc.data().indicator6;
+                i7.innerText = doc.data().indicator7;
+                i8.innerText = doc.data().indicator8;
+                i9.innerText = doc.data().indicator9;
+                i10.innerText = doc.data().indicator10;
+                i11.innerText = doc.data().indicator11;
+
+                complete1.value = doc.data().complete1
+                complete2.value = doc.data().complete2
+                complete3.value = doc.data().complete3
+                complete4.value = doc.data().complete4
+				
+				  // Create HTML elements to display document details
+				  Object.keys(data).forEach(function(key) {
+					var label = document.createElement("label");
+					label.textContent = key + ": ";
+					var value = document.createElement("span");
+					value.textContent = data[key];
+					var br = document.createElement("br");
+					
+				  });
+				});
+				listItem.appendChild(link);
+				collectionList.appendChild(listItem);
+			  });
+			});
+
+        </script>
+    </body>
+</div>
+    <!-- CSS for the things we want to print (print view) -->
+        <style type="text/css" media="print">
+        
+            #SCREEN_VIEW_CONTAINER{
+                    display: none;
+                }
+            .other_print_layout{
+                    background-color:#FFF;
+                }
+            </style>
+            
+            <!-- CSS for the things we DO NOT want to print (web view) -->
+            <style type="text/css" media="screen">
+            
+               #editor{
+                  display: none;
+               }
+            .other_web_layout{
+                    background-color:#E0E0E0;
+                }
+            </style>
+    <div class="editor" contenteditable="true" id="editormain"><p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:center;'><strong>Western University</strong></p>
+
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:center;'><strong>Faculty of Engineering</strong></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:center;'><strong>Department of Electrical and Computer Engineering</strong></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:center;'><strong>&nbsp;</strong></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-bottom:6.0pt;text-align:center;'><strong><span style="font-size:19px;">ECE XXXXA/B: Course Title</span></strong></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:center;'><strong>Course Outline 20YY-YY</strong></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:center;'><strong>&nbsp;</strong></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:center;'><strong>&nbsp;</strong></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><strong>Description:&nbsp;</strong></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><strong>Instructor:</strong>&nbsp; &nbsp; &nbsp;&nbsp;Dr. Name, P.Eng.</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;TEB XXX, 519-661-2111 ext. XXXXX, UWO e-mail address as hyperlink</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;Consultation hours:</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-bottom:6.0pt;text-align:justify;'><strong>Academic Calendar Copy:</strong>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-bottom:6.0pt;text-align:justify;'><strong>Contact Hours:</strong> X lecture hours, Y laboratory hours, Z tutorial hours, 0.5 course.</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-bottom:6.0pt;text-align:justify;'><strong>Antirequisite:</strong>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><strong>Prerequisites:</strong>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:6.0pt;text-align:justify;'><strong>Co-requisite:</strong>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:6.0pt;text-align:justify;'>Unless you have either the requisites for this course or written special permission from your Dean to enroll in it, you will be removed from this course and it will be deleted from your record. This decision may not be appealed. You will receive no adjustment to your fees in the event that you are dropped from a course for failing to have the necessary prerequisites.</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><strong>CEAB Academic Units:</strong> Engineering Science X%, Engineering Design Y%.</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><strong>Required Textbook:</strong></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><strong>Other Required References:</strong></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><strong>Recommended References:</strong></p>
+        <p><strong><span style='font-size:16px;font-family:"Times New Roman",serif;'><br>&nbsp;</span></strong></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-bottom:6.0pt;text-align:justify;'><strong>General Learning Objectives (CEAB Graduate Attributes)</strong></p>
+        <div align="center" style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'>
+            <table style="width: 4.7e+2pt;border: none;border-collapse:collapse;">
+                <tbody>
+                    <tr>
+                        <td style="width:131.75pt;border:solid black 1.0pt;border-right:  none;padding:0cm 5.4pt 0cm 5.4pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;'><span style="font-weight:  normal;">Knowledge Base</span></p>
+                        </td>
+                        <td style="width:24.35pt;border:solid black 1.0pt;border-right:none;padding:0cm 0cm 0cm 0cm;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;text-align:center;'><span style="font-weight:normal;"><label for="indicator" id = "indicator" >Choose indicator:</label>
+
+                                <select name="indicator" id="indicator0">
+                                <option value="KBX">X</option>
+                                <option value="KB1">KB1</option>
+                                <option value="KB2">KB2</option>
+                                <option value="KB3">KB3</option>
+                                <option value="KB4">KB4</option>
+                                </select></span></p>
+                        </td>
+                        <td style="width:131.75pt;border:solid black 1.0pt;border-right:  none;padding:0cm 5.4pt 0cm 5.4pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;'><span style="font-weight:  normal;">Use of Engineering Tools</span></p>
+                        </td>
+                        <td style="width:23.75pt;border:solid black 1.0pt;border-right:none;padding:0cm 0cm 0cm 0cm;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;text-align:center;'><span style="font-weight:normal;"><label for="indicator1">Choose a indicator:</label>
+
+                                <select name="indicator" id="indicator1">
+                                <option value="ETX">X</option>
+                                <option value="ET1">ET1</option>
+                                <option value="ET2">ET2</option>
+                                <option value="ET3">ET3</option>
+                                </select></span></p>
+                        </td>
+                        <td style="width:131.75pt;border:solid black 1.0pt;border-right:  none;padding:0cm 5.4pt 0cm 5.4pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;'><span style="font-weight:  normal;">Impact on Society and the Environment</span></p>
+                        </td>
+                        <td style="width:23.75pt;border:solid black 1.0pt;padding:0cm 0cm 0cm 0cm;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;text-align:center;'><span style="font-weight:normal;"><label for="indicator2">Choose a indicator:</label>
+
+                                <select name="indicator" id="indicator2">
+                                <option value="IESEX">X</option>
+                                <option value="IESE1">IESE1</option>
+                                <option value="IESE2">IESE2</option>
+                                <option value="IESE3">IESE3</option>
+                                </select></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:131.75pt;border-top:none;border-left:solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;'><span style="font-weight:  normal;">Problem Analysis</span></p>
+                        </td>
+                        <td style="width:24.35pt;border-top:none;border-left:solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;padding:0cm 0cm 0cm 0cm;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;text-align:center;'><span style="font-weight:normal;"><label for="indicator3">Choose a indicator:</label>
+
+                                <select name="indicator" id="indicator3">
+                                <option value="PAX">X</option>
+                                <option value="PA1">PA1</option>
+                                <option value="PA2">PA2</option>
+                                <option value="PA3">PA3</option>
+                                </select></span></p>
+                        </td>
+                        <td style="width:131.75pt;border-top:none;border-left:solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;'><span style="font-weight:  normal;">Individual and Team Work</span></p>
+                        </td>
+                        <td style="width:23.75pt;border-top:none;border-left:solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;padding:0cm 0cm 0cm 0cm;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;text-align:center;'><span style="font-weight:normal;"><label for="indicator4">Choose a indicator:</label>
+
+                                <select name="indicator" id="indicator4">
+                                <option value="ITWX">X</option>
+                                <option value="ITW1">ITW1</option>
+                                <option value="ITW2">ITW2</option>
+                                <option value="ITW3">ITW3</option>
+                                </select></span></p>
+                        </td>
+                        <td style="width:131.75pt;border-top:none;border-left:solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;'><span style="font-weight:  normal;">Ethics and Equity</span></p>
+                        </td>
+                        <td style="width:23.75pt;border:solid black 1.0pt;border-top:none;padding:0cm 0cm 0cm 0cm;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;text-align:center;'><span style="font-weight:normal;"><label for="indicator5">Choose a indicator:</label>
+
+                                <select name="indicator" id="indicator5">
+                                <option value="EEX">X</option>
+                                <option value="EE1">EE1</option>
+                                <option value="EE2">EE2</option>
+                                <option value="EE3">EE3</option>
+                                <option value="EE4">EE4</option>
+                                </select></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:131.75pt;border-top:none;border-left:solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;'><span style="font-weight:  normal;">Investigation</span></p>
+                        </td>
+                        <td style="width:24.35pt;border-top:none;border-left:solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;padding:0cm 0cm 0cm 0cm;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;text-align:center;'><span style="font-weight:normal;"><label for="indicator5">Choose a indicator:</label>
+
+                                <select name="indicator" id="indicator6">
+                                <option value="IX">X</option>
+                                <option value="I1">I1</option>
+                                <option value="I2">I2</option>
+                                <option value="I3">I3</option>
+                                
+                                </select></span></p>
+                        </td>
+                        <td style="width:131.75pt;border-top:none;border-left:solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;'><span style="font-weight:  normal;">Communication Skills</span></p>
+                        </td>
+                        <td style="width:23.75pt;border-top:none;border-left:solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;padding:0cm 0cm 0cm 0cm;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;text-align:center;'><span style="font-weight:normal;"><label for="indicator5">Choose a indicator:</label>
+
+                                <select name="indicator" id="indicator7">
+                                <option value="CSX">X</option>
+                                <option value="CS1">CS1</option>
+                                <option value="CS12">CS2</option>
+                                <option value="CS13">CS3</option>
+                                <option value="CS14">CS4</option>
+                                </select></span></p>
+                        </td>
+                        <td style="width:131.75pt;border-top:none;border-left:solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;'><span style="font-weight:  normal;">Economics and Project Management</span></p>
+                        </td>
+                        <td style="width:23.75pt;border:solid black 1.0pt;border-top:none;padding:0cm 0cm 0cm 0cm;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;text-align:center;'><span style="font-weight:normal;"><label for="indicator5">Choose a indicator:</label>
+
+                                <select name="indicator" id="indicator8">
+                                <option value="EPMX">X</option>
+                                <option value="EPM1">EPM1</option>
+                                <option value="EPM2">EPM2</option>
+                                <option value="EPM3">EPM3</option>
+                                <option value="EPM4">EPM4</option>
+                                </select></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:131.75pt;border-top:none;border-left:solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt;height:30.1pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;'><span style="font-weight:  normal;">Design</span></p>
+                        </td>
+                        <td style="width:24.35pt;border-top:none;border-left:solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;padding:0cm 0cm 0cm 0cm;height:30.1pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;text-align:center;'><span style="font-weight:normal;"><label for="indicator5">Choose a indicator:</label>
+
+                                <select name="indicator" id="indicator9">
+                                <option value="DX">X</option>
+                                <option value="D1">D1</option>
+                                <option value="D2">D2</option>
+                                <option value="D3">D3</option>
+                                <option value="D4">D4</option>
+                                </select></span></p>
+                        </td>
+                        <td style="width:131.75pt;border-top:none;border-left:solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt;height:30.1pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;'><span style="font-weight:  normal;">Professionalism</span></p>
+                        </td>
+                        <td style="width:23.75pt;border-top:none;border-left:solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;padding:0cm 0cm 0cm 0cm;height:30.1pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;text-align:center;'><span style="font-weight:normal;"><label for="indicator5">Choose a indicator:</label>
+
+                                <select name="indicator" id="indicator10">
+                                <option value="PRX">X</option>
+                                <option value="PR1">PR1</option>
+                                <option value="PR2">PR2</option>
+                                <option value="PR3">PR3</option>
+                                
+                                </select></span></p>
+                        </td>
+                        <td style="width:131.75pt;border-top:none;border-left:solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt;height:30.1pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;'><span style="font-weight:  normal;">Life-Long Learning</span></p>
+                        </td>
+                        <td style="width:23.75pt;border:solid black 1.0pt;border-top:none;padding:0cm 0cm 0cm 0cm;height:30.1pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;font-weight:bold;text-align:center;'><span style="font-weight:normal;"><label for="indicator5">Choose a indicator:</label>
+
+                                <select name="indicator" id="indicator11">
+                                <option value="LLX">X</option>
+                                <option value="LL1">LL1</option>
+                                <option value="LL2">LL2</option>
+                                
+                                </select></span></p>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:3.0pt;text-align:justify;'><span style="font-size:15px;">Notation</span><em><span style="font-size:15px;">: where x be I: Introductory, D: Intermediate, A: Advanced, or empty</span></em><span style="font-size:15px;">. I &ndash; The instructor will introduce the topic at the level required. &nbsp; It is not necessary for the student to have seen the material before. D &ndash; There may be a reminder or review, but the student is expected to have seen and been tested on the material before taking the course. A &ndash; It is expected that the student can apply the knowledge without prompting (e.g. no review).</span></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <table style="border-collapse:collapse;border:none;">
+            <script>
+                function setTime(num){
+                console.log("hello")
+                var today = new Date();
+                var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                var dateTime = date+' '+time;
+                 
+                console.log(dateTime)
+            
+                var checkboxvar = document.getElementById("completed" + num);
+                
+                if (checkboxvar.checked == true){
+                   
+                    document.getElementById("completed" + num + "0").innerHTML = "Completed on: " + dateTime;
+                }
+                else{
+                    document.getElementById("completed" + num + "0").innerHTML = "Completed on: ";
+                }
+            }
+            </script>
+            <tbody>
+                <tr>
+                    <td style="width: 368.3pt;border: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:6.0pt;text-align:justify;'><strong>Course Topics and Specific Learning Outcomes</strong></p>
+                    </td>
+                    <td style="width: 99.2pt;border-top: 1pt solid windowtext;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-image: initial;border-left: none;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:6.0pt;'><strong>CEAB Graduate Attributes Indicators</strong></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 368.3pt;border-top: none;border-left: 1pt solid windowtext;border-bottom: none;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;"> 
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:6.0pt;text-align:justify;'><strong>1.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</strong><strong>Topic 1</strong><input type="checkbox" id="completed1" name="completed1" value="completed1" onclick= "setTime('1');">
+                            <label id="completed10"> Completed on: </label><br></p>
+                    </td>
+                    <td style="width: 99.2pt;border-top: none;border-bottom: none;border-left: none;border-image: initial;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:6.0pt;text-align:justify;'><strong>&nbsp;</strong></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 368.3pt;border-top: none;border-left: 1pt solid windowtext;border-bottom: none;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:3.0pt;text-align:justify;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;At the end of this section, students will be able to:</p>
+                    </td>
+                    <td style="width: 99.2pt;border-top: none;border-bottom: none;border-left: none;border-image: initial;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:3.0pt;text-align:justify;'><strong>&nbsp;</strong></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 368.3pt;border-top: none;border-left: 1pt solid windowtext;border-bottom: none;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <div style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'>
+                            <ol start="1" style="margin-bottom:0cm;list-style-type: lower-alpha;">
+                                <li style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'><span style='font-family:"Times New Roman";'>&nbsp;</span></li>
+                            </ol>
+                        </div>
+                    </td>
+                    <td style="width: 99.2pt;border-top: none;border-bottom: none;border-left: none;border-image: initial;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:3.0pt;margin-right:0cm;margin-bottom:.0001pt;margin-left:9.0pt;'>&nbsp;</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 368.3pt;border-top: none;border-left: 1pt solid windowtext;border-bottom: none;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <div style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'>
+                            <ol start="2" style="margin-bottom:0cm;list-style-type: lower-alpha;">
+                                <li style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'><span style='font-family:"Times New Roman";'>&nbsp;</span></li>
+                            </ol>
+                        </div>
+                    </td>
+                    <td style="width: 99.2pt;border-top: none;border-bottom: none;border-left: none;border-image: initial;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:3.0pt;margin-right:0cm;margin-bottom:.0001pt;margin-left:9.0pt;text-align:justify;'><strong>&nbsp;</strong></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 368.3pt;border-top: none;border-left: 1pt solid windowtext;border-bottom: none;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:6.0pt;text-align:justify;'><strong>2.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</strong><strong>Topic 2</strong><input type="checkbox" id="completed2" name="completed2" value="completed2" onclick="setTime(2);">
+                            <label id="completed20"> Completed on: </label><br></p>
+                    </td>
+                    <td style="width: 99.2pt;border-top: none;border-bottom: none;border-left: none;border-image: initial;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:6.0pt;margin-right:0cm;margin-bottom:.0001pt;margin-left:9.0pt;text-align:justify;'><strong>&nbsp;</strong></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 368.3pt;border-top: none;border-left: 1pt solid windowtext;border-bottom: none;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:3.0pt;text-align:justify;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;At the end of this section, students will be able to:</p>
+                    </td>
+                    <td style="width: 99.2pt;border-top: none;border-bottom: none;border-left: none;border-image: initial;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:3.0pt;margin-right:0cm;margin-bottom:.0001pt;margin-left:9.0pt;text-align:justify;'><strong>&nbsp;</strong></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 368.3pt;border-top: none;border-left: 1pt solid windowtext;border-bottom: none;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <div style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'>
+                            <ol start="1" style="margin-bottom:0cm;list-style-type: lower-alpha;">
+                                <li style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'><span style=";">&nbsp;</span></li>
+                            </ol>
+                        </div>
+                    </td>
+                    <td style="width: 99.2pt;border-top: none;border-bottom: none;border-left: none;border-image: initial;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:3.0pt;margin-right:0cm;margin-bottom:.0001pt;margin-left:9.0pt;text-align:justify;'><strong>&nbsp;</strong></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 368.3pt;border-top: none;border-left: 1pt solid windowtext;border-bottom: none;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <div style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'>
+                            <ol start="2" style="margin-bottom:0cm;list-style-type: lower-alpha;">
+                                <li style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'><span style=";">&nbsp;</span></li>
+                            </ol>
+                        </div>
+                    </td>
+                    <td style="width: 99.2pt;border-top: none;border-bottom: none;border-left: none;border-image: initial;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:3.0pt;margin-right:0cm;margin-bottom:.0001pt;margin-left:9.0pt;text-align:justify;'><strong>&nbsp;</strong></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 368.3pt;border-top: none;border-left: 1pt solid windowtext;border-bottom: none;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:6.0pt;text-align:justify;'><strong>3.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</strong><strong>Topic 3</strong><input type="checkbox" id="completed3" name="completed3" value="completed3" onclick="setTime(3);">
+                            <label id="completed30"> Completed on: </label><br></p>
+                    </td>
+                    <td style="width: 99.2pt;border-top: none;border-bottom: none;border-left: none;border-image: initial;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:6.0pt;margin-right:0cm;margin-bottom:.0001pt;margin-left:9.0pt;text-align:justify;'><strong>&nbsp;</strong></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 368.3pt;border-top: none;border-left: 1pt solid windowtext;border-bottom: none;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:3.0pt;text-align:justify;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;At the end of this section, students will be able to:</p>
+                    </td>
+                    <td style="width: 99.2pt;border-top: none;border-bottom: none;border-left: none;border-image: initial;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:3.0pt;margin-right:0cm;margin-bottom:.0001pt;margin-left:9.0pt;text-align:justify;'><strong>&nbsp;</strong></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 368.3pt;border-top: none;border-left: 1pt solid windowtext;border-bottom: none;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <div style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'>
+                            <ol start="1" style="margin-bottom:0cm;list-style-type: lower-alpha;">
+                                <li style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'><span style=";">&nbsp;</span></li>
+                            </ol>
+                        </div>
+                    </td>
+                    <td style="width: 99.2pt;border-top: none;border-bottom: none;border-left: none;border-image: initial;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:3.0pt;margin-right:0cm;margin-bottom:.0001pt;margin-left:9.0pt;'><strong>&nbsp;</strong></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 368.3pt;border-top: none;border-left: 1pt solid windowtext;border-bottom: none;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <div style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'>
+                            <ol start="2" style="margin-bottom:0cm;list-style-type: lower-alpha;">
+                                <li style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'><span style=";">&nbsp;</span></li>
+                            </ol>
+                        </div>
+                    </td>
+                    <td style="width: 99.2pt;border-top: none;border-bottom: none;border-left: none;border-image: initial;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:3.0pt;margin-right:0cm;margin-bottom:.0001pt;margin-left:9.0pt;text-align:justify;'><strong>&nbsp;</strong></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 368.3pt;border-top: none;border-left: 1pt solid windowtext;border-bottom: none;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:6.0pt;text-align:justify;'><strong>4.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</strong><strong>Topic 4</strong><input type="checkbox" id="completed4" name="completed4" value="completed4" onclick="setTime(4);">
+                            <label id="completed40"> Completed on: </label><br></p> 
+                    </td>
+                    <td style="width: 99.2pt;border-top: none;border-bottom: none;border-left: none;border-image: initial;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:6.0pt;margin-right:0cm;margin-bottom:.0001pt;margin-left:9.0pt;text-align:justify;'><strong>&nbsp;</strong></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 368.3pt;border-top: none;border-left: 1pt solid windowtext;border-bottom: none;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:3.0pt;text-align:justify;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;At the end of this section, students will be able to:</p>
+                    </td>
+                    <td style="width: 99.2pt;border-top: none;border-bottom: none;border-left: none;border-image: initial;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:3.0pt;margin-right:0cm;margin-bottom:.0001pt;margin-left:9.0pt;text-align:justify;'><strong>&nbsp;</strong></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 368.3pt;border-top: none;border-left: 1pt solid windowtext;border-bottom: none;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <div style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'>
+                            <ol start="1" style="margin-bottom:0cm;list-style-type: lower-alpha;">
+                                <li style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'><span style=";">&nbsp;</span></li>
+                            </ol>
+                        </div>
+                    </td>
+                    <td style="width: 99.2pt;border-top: none;border-bottom: none;border-left: none;border-image: initial;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:3.0pt;margin-right:0cm;margin-bottom:.0001pt;margin-left:9.0pt;'><strong>&nbsp;</strong></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 368.3pt;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-left: 1pt solid windowtext;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                        <div style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'>
+                            <ol start="2" style="margin-bottom:0cm;list-style-type: lower-alpha;">
+                                <li style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'><span style=";">&nbsp;&nbsp;</span></li>
+                            </ol>
+                        </div>
+                    </td>
+                    <td style="width: 99.2pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:3.0pt;margin-right:0cm;margin-bottom:.0001pt;margin-left:9.0pt;'><strong>&nbsp;</strong></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-bottom:6.0pt;text-align:justify;'><strong>Evaluation</strong></p>
+        <div align="center" style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'>
+            <table style="width: 3.0e+2pt;border: none;border-collapse:collapse;">
+                <tbody>
+                    <tr>
+                        <td style="width:207.0pt;border:solid black 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'><strong><span style="color:black;">Course Component</span></strong></p>
+                        </td>
+                        <td style="width:90.0pt;border:solid black 1.0pt;border-left:none;padding:0cm 5.4pt 0cm 5.4pt;height:  18.0pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:center;'><strong><span style="color:black;">Weight</span></strong></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:207.0pt;border:solid black 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'><span style="color:black;">Homework Assignments</span></p>
+                        </td>
+                        <td style="width:90.0pt;border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:center;'><span style="color:black;">%</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:207.0pt;border:solid black 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'><span style="color:black;">Quizzes</span></p>
+                        </td>
+                        <td style="width:90.0pt;border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:center;'><span style="color:black;">%</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:207.0pt;border:solid black 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'><span style="color:black;">Laboratory</span></p>
+                        </td>
+                        <td style="width:90.0pt;border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:center;'><span style="color:black;">%</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:207.0pt;border:solid black 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'><span style="color:black;">Midterm Test</span></p>
+                        </td>
+                        <td style="width:90.0pt;border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:center;'><span style="color:black;">%</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:207.0pt;border:solid black 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;'><span style="color:black;">Final Examination</span></p>
+                        </td>
+                        <td style="width:90.0pt;border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:18.0pt;">
+                            <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:center;'><span style="color:black;">50%</span></p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:6.0pt;text-align:justify;'><span style="color:black;">To obtain a passing grade in the course, a mark of 50% or more must be achieved on the final examination as well as on the laboratory. A final examination or laboratory mark &lt; 50% will result in a final course grade of 48% or less.</span></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:6.0pt;text-align:justify;'><strong>Homework Assignments:</strong></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:6.0pt;text-align:justify;'><strong>Quizzes:</strong></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:6.0pt;text-align:justify;'><strong>Laboratory:</strong></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:6.0pt;text-align:justify;'><strong>Midterm Test:</strong></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;margin-top:6.0pt;text-align:justify;'><strong>Final Examination:</strong> The final examination will be take place during the regular examination period.</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><strong>Late Submission Policy:&nbsp;</strong></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><strong>Assignment Submission Locker:&nbsp;</strong>Locker XYZ located on the second floor of TEB.</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><strong>Use of English:&nbsp;</strong>In accordance with Senate and Faculty Policy, students may be penalized up to 10% of the marks on all assignments, tests, and examinations for improper use of English. Additionally, poorly written work with the exception of the final examination may be returned without grading. If resubmission of the work is permitted, it may be graded with marks deducted for poor English and/or late submission.</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><strong>Attendance:</strong> Any student who, in the opinion of the instructor, is absent too frequently from class, laboratory, or tutorial periods will be reported to the Dean (after due warning has been given). On the recommendation of the department, and with the permission of the Dean, the student will be debarred from taking the regular final examination in the course.</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><strong>Absence Due to Illness or Other Circumstances:</strong> Students should immediately consult with the instructor or department Chair if they have any problems that could affect their performance in the course. Where appropriate, the problems should be documented (see the attached &ldquo;Instructions for Students Unable to Write Tests or Examinations or Submit Assignments as Scheduled&rdquo;). The student should seek advice from the instructor or department Chair regarding how best to deal with the problem. Failure to notify the instructor or department Chair immediately (or as soon as possible thereafter) will have a negative effect on any appeal.</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>For more information concerning medical accommodations, see the relevant section of the Academic Handbook:</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><a href="http://www.uwo.ca/univsec/pdf/academic_policies/appeals/accommodation_medical.pdf">http://www.uwo.ca/univsec/pdf/academic_policies/appeals/accommodation_medical.pdf</a></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>For more information concerning accommodations for religious holidays, see&nbsp;the relevant section of the Academic Handbook:</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><a href="http://www.uwo.ca/univsec/pdf/academic_policies/appeals/accommodation_religious.pdf">http://www.uwo.ca/univsec/pdf/academic_policies/appeals/accommodation_religious.pdf</a></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><strong>Missed Midterm Examinations:&nbsp;</strong>If a student misses a midterm examination, she or he must follow the Instructions for Students Unable to Write Tests and provide documentation to Undergraduate Services Office within 24 hours of the missed test. If accommodation is granted, the department will decide whether to provide a make-up test or allow reweighting of the test, where reweighting means the marks normally allotted for the midterm will be added to the final exam. If no reasonable justification for missing the test can be found, then the student will receive a mark of zero for the test.</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>If a student is going to miss the midterm examination for religious reasons, they must inform the instructor in writing within 48 hours of the announcement of the exam date or they will be required to write the exam.&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><strong>&nbsp;</strong></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><strong>Cheating and Plagiarism:</strong> Students must write their essays and assignments in their own words. Whenever students take an idea or a passage from another author, they must acknowledge their debt both by using quotation marks where appropriate and by proper referencing such as footnotes or citations. University policy states that cheating, including plagiarism, is a scholastic offence. The commission of a scholastic offence is attended by academic penalties, which might include expulsion from the program. If you are caught cheating, there will be no second warning.</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>All required papers may be subject to submission for textual similarity review to commercial plagiarism-detection software under license to the University for the detection of plagiarism. All papers submitted will be included as source documents on the reference database for the purpose of detecting plagiarism of papers subsequently submitted to the system. Use of the service is subject to the licensing agreement, currently between the University of Western Ontario and Turnitin.com (<a href="http://www.turnitin.com">http://www.turnitin.com</a>).</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>Scholastic offences are taken seriously and students are directed to read the appropriate policy, specifically, the definition of what constitutes a Scholastic Offence, in&nbsp;the relevant section of the Academic Handbook:</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><a href="http://www.uwo.ca/univsec/pdf/academic_policies/appeals/scholastic_discipline_undergrad.pdf">http://www.uwo.ca/univsec/pdf/academic_policies/appeals/scholastic_discipline_undergrad.pdf</a></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><strong>Use of Electronic Devices:&nbsp;</strong></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><strong>Use of Personal Response Devices (&ldquo;Clickers&rdquo;):&nbsp;</strong></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><strong>Policy on Repeating All Components of a Course:&nbsp;</strong>Students who are required to repeat an Engineering course must repeat all components of the course. No special permissions will be granted enabling a student to retain laboratory, assignment, or test marks from previous years. Previously completed assignments and laboratories cannot be resubmitted by the student for grading in subsequent years.</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><strong>Internet and Electronic Mail:</strong> Students are responsible for regularly checking their Western e‑mail and the course web site (<a href="https://owl.uwo.ca/portal/">https://owl.uwo.ca/portal/</a>) and making themselves aware of any information that is posted about the course.</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><strong>Accessibility:</strong> Please contact the course instructor if you require material in an alternate format or if any other arrangements can make this course more accessible to you. You may also wish to contact Services for Students with Disabilities (SSD) at 519-661-2111 ext. 82147 for any specific question regarding an accommodation.</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp;</p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><strong>Support Services:&nbsp; &nbsp; &nbsp;&nbsp;</strong>Office of the Registrar,&nbsp;<a href="http://www.registrar.uwo.ca/">http://www.registrar.uwo.ca/</a></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;Student Development Centre,&nbsp;<a href="http://www.sdc.uwo.ca/">http://www.sdc.uwo.ca/</a></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;Engineering Undergraduate Services,&nbsp;<a href="http://www.eng.uwo.ca/undergraduate/">http://www.eng.uwo.ca/undergraduate/</a></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;USC Student Support Services,&nbsp;<a href="http://westernusc.ca/services/">http://westernusc.ca/services/</a></p>
+        <p style='margin:0cm;font-size:16px;font-family:"Times New Roman",serif;text-align:justify;'><strong>&nbsp;</strong></p>
+        <p><span style='font-size:16px;font-family:"Times New Roman",serif;'>Students who are in emotional/mental distress should refer to Mental Health @ Western,&nbsp;</span><span style='font-size:16px;font-family:"Times New Roman",serif;'><a href="http://www.health.uwo.ca/mental_health/">http://www.health.uwo.ca/mental_health/</a>, for a complete list of options about how to obtain help.</span></p></div>
+    
+        <div>
+            <!--Make visible/non-visible based on if user is editing a course outline or making a new one-->
+            <div id="">
+                <p>Justification</p>
+                <textarea name="feedback" id="feedback" cols="30" rows="10"></textarea>
+                <br>
+            </div>
+
+            <!--Make this div visible/not visible based on choice at top of page (new course outline)-->
+            <div id="">
+                <p>New Course Outline Name</p>
+                <textarea name="outline" id="outline" rows="1" cols="20"></textarea>
+            </div>
+
+            <button type="submit" id="submit">Submit</button>
+            <button onclick="printPageAsPDF()">Print as PDF</button>
+            
+            <!--If the name already exists in database, throw error onto screen OR ALERT-->
+            <p id=""></p>
+        </div>
+        <div id="information-logs">
+            <p>History logs for</p>
+            <!--Make this p element controllable by which ever course outline is being edited-->
+            <p id="historylog"></p>
+            <br>
+            <table>
+              <thead>
+                <tr>
+                  <th>Time Stamp</th>
+                  <th>User ID</th>
+                  <th>Activity Changed</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Table rows will be added through JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+        <script src="main.js"></script>
+
+    
+    </div&gt;
